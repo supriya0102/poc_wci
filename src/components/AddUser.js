@@ -111,7 +111,7 @@ return(
         
         <Grid item xs={9}>
         <h3>Academic information </h3>
-           <TextField id="select" label="Select highest Education" onChange={handleChange} fullWidth select>
+           <TextField id="select" label="Select highest Education"  onChange={handleChange} fullWidth select>
              <MenuItem value="ssc">SSC</MenuItem>
              <MenuItem value="hsc">HSC</MenuItem>
              <MenuItem value="graduation">Graduation</MenuItem>
