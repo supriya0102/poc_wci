@@ -1,6 +1,8 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import AddUser from "./AddUser";
+import { Link,Route } from "react-router-dom";
 
-function Header() {
+function Header(props) {
   return (
       <AppBar position="static">
         <Toolbar>
@@ -8,7 +10,7 @@ function Header() {
             component="div" sx={{ flexGrow: 1 }}>
             Western Climate Initiative
           </Typography>
-          <Button color="inherit">Add User</Button>
+         <Link to="/AddUser"  ><Button color="inherit" >Add User</Button></Link> 
         </Toolbar>
       </AppBar>
   );
