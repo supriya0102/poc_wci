@@ -4,10 +4,16 @@ import Header from './Header';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Container, IconButton } from "@mui/material";
 import { Edit } from '@mui/icons-material';
 import { users } from '../store/home/HomeAction';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import {useNavigate} from 'react-router-dom'
 
 function Home() {
     const dispatch = useDispatch();
     const reduxStore = useSelector(state => state.usersReducer.users)
+    const navigate = useNavigate();
+const onViewClick = () =>{
+    navigate('/profile');
+}
 
     useEffect(() => {
         dispatch(users());
@@ -26,6 +32,7 @@ function Home() {
                         <TableCell align="right">LastName</TableCell>
                         <TableCell align="right">Email</TableCell>
                         <TableCell align="right">Edit</TableCell>
+                        <TableCell align="right">View</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -37,6 +44,7 @@ function Home() {
                             <TableCell align="right">{row.lastName}</TableCell>
                             <TableCell align="right">{row.email}</TableCell>
                             <TableCell align="right"><IconButton><Edit></Edit></IconButton></TableCell>
+                            <TableCell align="right" onClick={onViewClick}><IconButton><RemoveRedEyeIcon></RemoveRedEyeIcon></IconButton></TableCell>
                         </TableRow>
                     ))
                     }
