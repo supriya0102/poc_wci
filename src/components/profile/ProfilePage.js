@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -7,17 +7,6 @@ import "./profilepage.css";
 import data from './data.json'
 
 const ProfilePage = () => {
-
-  // useEffect(() =>{
-  //     getUserDetails();
-  // },[])
-
-  // const getUserDetails = async() =>{
-  //   let result = await fetch('http://localhost:3000/api/user/{param}');
-  //   result = result.json();
-  //   log
-  // }
-
   return (
     <div className="container">
     <div className="outer-container">
