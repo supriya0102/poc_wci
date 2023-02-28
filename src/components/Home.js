@@ -11,7 +11,7 @@ function Home() {
 
     useEffect(() => {
         users().then(res=>{
-            dispatch(res);
+            dispatch(res)
         })
     }, [])
 
