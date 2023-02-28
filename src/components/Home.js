@@ -10,7 +10,9 @@ function Home() {
     const reduxStore = useSelector(state => state.usersReducer.users)
 
     useEffect(() => {
-        dispatch(users());
+        users().then(res=>{
+            dispatch(res)
+        })
     }, [])
 
     return (
