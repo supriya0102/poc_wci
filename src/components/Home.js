@@ -16,7 +16,9 @@ const onViewClick = () =>{
 }
 
     useEffect(() => {
-        dispatch(users());
+        users().then(res=>{
+            dispatch(res)
+        })
     }, [])
 
     return (
