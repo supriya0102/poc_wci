@@ -12,7 +12,7 @@ const ProfilePage = () => {
   
   useEffect(() => {
     getUserDetails();
-  },[]);
+  });
   const getUserDetails = async () => {
     let result = await fetch(`http://localhost:3000/api/user/${id}`);
     result = await result.json();
@@ -48,10 +48,10 @@ const ProfilePage = () => {
           </div>
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component={'span'}>
                 Personal Information
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" component={'div'}>
                 <h4>First Name: {user?.basicInfo?.firstName}</h4>
                 <h4>Last Name: {user?.basicInfo?.lastName} </h4>
                 <h4>Email: {user?.basicInfo?.email}</h4>
@@ -60,10 +60,10 @@ const ProfilePage = () => {
           </Card>
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component={'span'}>
                 Academic Information
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" component={'div'}>
                 <h4>Education: {user?.academicInfo?.[0]?.type} </h4>
                 <h4>
                   School/College/University: {user?.academicInfo?.[0]?.institute}
@@ -74,10 +74,10 @@ const ProfilePage = () => {
           </Card>
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component={'span'}>
                 Employment Information
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" component={'div'}>
                 <h4>Employee Code: {user?.employementInfo?.[0]?.employeeCode}</h4>
                 <h4>Company Name: {user?.employementInfo?.[0]?.companyName} </h4>
                 <h4>Designation: {user?.employementInfo?.[0]?.designation} </h4>
