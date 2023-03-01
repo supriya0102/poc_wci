@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import "./AddUser.css";
-import { TextField,Grid,Button,MenuItem} from "@mui/material";
+import { TextField,Grid,Button,MenuItem, Card, Paper} from "@mui/material";
 import axios from "axios";
 
 const AddUser=({userId})=>{
@@ -18,77 +18,42 @@ const AddUser=({userId})=>{
     companyName: '',
     designation: '',
   });
-console.log("state",state)
+// console.log("state",state)
 
 const handleChange = (e) => {
   const { name, value } = e.target;
   setState((prevState)=>({...prevState,[name]:value}));
 }
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const response = await axios.get(`api/user/${userId}`);
-  //       const { basicInfo, academicInfo, employementInfo } = response.data;
-  //       setFirstName(basicInfo.firstName);
-  //       setLastName(basicInfo.lastName);
-  //       setEmail(basicInfo.email);
-  //       setEducationType(academicInfo[0].type);
-  //       setCollege(academicInfo[0].college);
-  //       setPassingYear(academicInfo[0].passingYear);
-  //       setEmployeeCode(employementInfo[0].employeeCode);
-  //       setCompanyName(employementInfo[0].companyName);
-  //       setDesignation(employementInfo[0].designation);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
 
-  //   fetchUserData();
-  // }, [userId]);
+  const getapi=async()=>{
+    const payload=state
+    const result=await axios.post("http://localhost:3000/api/user/",payload)
+  }
 
-//   const handleSubmit = async (e) => {
-  const handleSubmit =  (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-   
-    // try {
-    //   await axios.put(`api/user/${userId}`, {
-    //     basicInfo: {
-    //       firstName,
-    //       lastName,
-    //       email,
-    //     },
-    //     academicInfo: [{
-    //       passingYear,
-    //     }],
-    //     employementInfo: [{
-    //       employeeCode,
-    //       companyName,
-    //       designation,
-    //     }],
-      };
-  //     console.log('User data updated successfully');
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
- 
+    console.log("state",state)
+    getapi()
+    
+}
 
 return(
+  <div className="paper" >
     <form className="mainDiv" onSubmit={e=> {handleSubmit(e)}} >
-         <h3>Besic Information</h3>
       <Grid container spacing={2}>
+      <Card className="Card1">
+         <h3>Besic Information</h3>
 
-          <Grid item xs={9}>
+          <Grid item xs={12}>
           <TextField
         label="First Name"
         fullWidth
         name="firstName"
         value={state.firstName}
-        // onChange={e=>setFirstName(e.target.value)}
         onChange={handleChange}
       />
           </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12}>
         <TextField
         label="Last Name"
         name="lastName"
@@ -98,7 +63,7 @@ return(
         onChange={handleChange}
       />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12}>
         <TextField
         label="Email"
         name="email"
@@ -108,8 +73,9 @@ return(
         onChange={handleChange}
       />
         </Grid>
-        
-        <Grid item xs={9}>
+        </Card>
+        <Card className="Card1">
+        <Grid item xs={12}>
         <h3>Academic information </h3>
            <TextField id="select" label="Select highest Education"  onChange={handleChange} fullWidth select>
              <MenuItem value="ssc">SSC</MenuItem>
@@ -118,18 +84,20 @@ return(
              <MenuItem value="post graduation">Post Graduation</MenuItem>
           </TextField>
         </Grid>
-        <Grid item xs={9}>
+        
+        <Grid item xs={12}>
            <TextField label="School/College/University" varient="outlined" fullWidth value={state.college} onChange={handleChange}/>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12}>
            <TextField type="date" varient="outlined" fullWidth onChange={handleChange} />
         </Grid>
-
-        <Grid item xs={9}>
+        </Card>
+        <Card className="Card1">
+        <Grid item xs={12}>
         <h3>Employment information  </h3>
            <TextField  label="Employee code " fullWidth value={state.employeeCode} onChange={handleChange} />
        </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12}>
         <TextField
         label="Company Name"
         fullWidth
@@ -137,7 +105,7 @@ return(
         onChange={handleChange}
       />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={12}>
         <TextField
         label="Designation"
         fullWidth
@@ -145,19 +113,22 @@ return(
         onChange={handleChange}
       />
         </Grid>
-        <Grid item xs={4}></Grid>
+        </Card>
+        <Grid item xs={7.5}></Grid>
         
-        <Grid item xs={4.5}>
-        <Button variant="contained" type="submit" onClick={handleSubmit} fullWidth>Submit</Button>
-        </Grid>
-        <Grid item xs={4.5}>
+        <Grid item xs={2}>
         <Button variant="contained" type="reset" color="error"  fullWidth>Cancel</Button>
+        </Grid>
+
+        <Grid item xs={2}>
+        <Button variant="contained" type="submit" onClick={handleSubmit} fullWidth>Submit</Button>
         </Grid>
 
 
       </Grid>
      
     </form>
+    </div>
 )};
 
 export default AddUser;

@@ -10,7 +10,7 @@ function Header(props) {
             component="div" sx={{ flexGrow: 1 }}>
             Western Climate Initiative
           </Typography>
-         <Link to="/AddUser"  ><Button color="inherit" >Add User</Button></Link> 
+         <Link to="/AddUser" style={{textDecoration:"none"}} ><Button  style={{color:"white",textDecoration:"none"}} >Add User</Button></Link> 
         </Toolbar>
       </AppBar>
   );
