@@ -4,21 +4,20 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Avatar from "avataaars";
 import "./profilepage.css";
-import {useParams} from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
   const [user, setuser] = useState("");
-   const { id } = useParams();
-  
+  const { id } = useParams();
+
   useEffect(() => {
+    const getUserDetails = async () => {
+      let result = await fetch(`http://localhost:3000/api/user/${id}`);
+      result = await result.json();
+      setuser(result);
+    };
     getUserDetails();
-  });
-  const getUserDetails = async () => {
-    let result = await fetch(`http://localhost:3000/api/user/${id}`);
-    result = await result.json();
-    setuser(result);
-  };
-  
+  }, [id]);
 
   return (
     <div className="container">
@@ -48,10 +47,14 @@ const ProfilePage = () => {
           </div>
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component={'span'}>
+              <Typography gutterBottom variant="h5" component={"span"}>
                 Personal Information
               </Typography>
-              <Typography variant="body2" color="text.secondary" component={'div'}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                component={"div"}
+              >
                 <h4>First Name: {user?.basicInfo?.firstName}</h4>
                 <h4>Last Name: {user?.basicInfo?.lastName} </h4>
                 <h4>Email: {user?.basicInfo?.email}</h4>
@@ -60,13 +63,18 @@ const ProfilePage = () => {
           </Card>
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component={'span'}>
+              <Typography gutterBottom variant="h5" component={"span"}>
                 Academic Information
               </Typography>
-              <Typography variant="body2" color="text.secondary" component={'div'}>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                component={"div"}
+              >
                 <h4>Education: {user?.academicInfo?.[0]?.type} </h4>
                 <h4>
-                  School/College/University: {user?.academicInfo?.[0]?.institute}
+                  School/College/University:{" "}
+                  {user?.academicInfo?.[0]?.institute}
                 </h4>
                 <h4>Passing Year:{user?.academicInfo?.[0]?.passingYear}</h4>
               </Typography>
@@ -74,12 +82,20 @@ const ProfilePage = () => {
           </Card>
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component={'span'}>
+              <Typography gutterBottom variant="h5" component={"span"}>
                 Employment Information
               </Typography>
-              <Typography variant="body2" color="text.secondary" component={'div'}>
-                <h4>Employee Code: {user?.employementInfo?.[0]?.employeeCode}</h4>
-                <h4>Company Name: {user?.employementInfo?.[0]?.companyName} </h4>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                component={"div"}
+              >
+                <h4>
+                  Employee Code: {user?.employementInfo?.[0]?.employeeCode}
+                </h4>
+                <h4>
+                  Company Name: {user?.employementInfo?.[0]?.companyName}{" "}
+                </h4>
                 <h4>Designation: {user?.employementInfo?.[0]?.designation} </h4>
               </Typography>
             </CardContent>
