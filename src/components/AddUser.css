@@ -1,0 +1,23 @@
+*{
+    margin: 10px;
+    
+}
+
+body{
+    background-color: blanchedalmond;
+}
+.mainDiv{
+    margin: 10px;
+    /* height: 800px; */
+    /* width: 800px; */
+    align-items: center;
+    /* margin-left: 18%; */
+
+    
+}
+
+.Card1{
+    padding: 4%;
+    padding-left: 1.5%;
+    width: 100%;
+}
