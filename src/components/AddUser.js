@@ -18,7 +18,7 @@ const AddUser=({userId})=>{
     companyName: '',
     designation: '',
   });
-// console.log("state",state)
+
 
 const handleChange = (e) => {
   const { name, value } = e.target;
