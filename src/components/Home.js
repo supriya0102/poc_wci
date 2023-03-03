@@ -63,9 +63,11 @@ function Home() {
                   <TableCell align="right">{row.lastName}</TableCell>
                   <TableCell align="right">{row.email}</TableCell>
                   <TableCell align="right">
+                  <Link to={`update/${row.id}`}>
                     <IconButton>
                       <Edit></Edit>
                     </IconButton>
+                  </Link>
                   </TableCell>
                   <TableCell align="right" onClick={onViewClick}>
                     <Link to={`profile/${row.id}`}>
