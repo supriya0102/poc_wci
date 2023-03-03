@@ -4,26 +4,20 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Avatar from "avataaars";
-import "./profilepage.css";
+import "./index.css";
 import { useParams } from "react-router-dom";
-import { users } from "../../store/profile/ProfileAction";
-
+import { getUserDetails } from "../../store/home/HomeAction";
 const ProfilePage = () => {
-  const [user, setUser] = useState("");
   const { id } = useParams();
   const dispatch = useDispatch();
-  const reduxStore = useSelector((state) => state?.profileReducer?.users);
-
-  console.log(reduxStore);
-
-
   useEffect(() => {
-    users().then((res) => {
+    getUserDetails(id).then((res) => {
       dispatch(res);
     });
-  }, []);
-
- 
+  }, [dispatch]);
+  const reduxStore = useSelector((state) => {
+    return state.userDetailReducer.user;
+  });
   return (
     <div className="container">
       <div className="outer-container">

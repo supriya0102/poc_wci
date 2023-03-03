@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "./Header";
+import Header from "../header/Header";
 import {
   Table,
   TableBody,
@@ -13,7 +13,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import { users } from "../store/home/HomeAction";
+import { users } from "../../store/home/HomeAction";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useNavigate, Link } from "react-router-dom";
 
