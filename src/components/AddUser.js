@@ -1,134 +1,165 @@
-import React,{useState,useEffect} from "react";
-import "./AddUser.css";
-import { TextField,Grid,Button,MenuItem, Card, Paper} from "@mui/material";
-import axios from "axios";
-
-const AddUser=({userId})=>{
-
-    const [firstName,setFirstName]=useState("")
-    const [user,setUser]=useState([])
-  const [state, setState] = useState({
-    firstName: "",
-    lastName: '',
-    email: '',
-    college: '',
-    educationType: '',
-    passingYear: '',
-    employeeCode: '',
-    companyName: '',
-    designation: '',
-  });
+import React, { useState } from 'react';
+import "./AddUser.css"
+import { TextField,Button,Grid,Card } from '@mui/material';
 
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setState((prevState)=>({...prevState,[name]:value}));
-}
+function AddUserForm() {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        eduType: '',
+        institute: '',
+        passingYear: '',
+        employeeCode: '',
+        companyName: '',
+        designation: ''
+      });
 
-  const getapi=async()=>{
-    const payload=state
-    const result=await axios.post("http://localhost:3000/api/user/",payload)
-  }
+      const handleChange = (event) => {
+        setFormData({ ...formData, [event.target.name]: event.target.value });
+      };
+      
+      const handleReset = () => {
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          eduType: '',
+          institute: '',
+          passingYear: '',
+          employeeCode: '',
+          companyName: '',
+          designation: ''
+        });
+      };     
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("state",state)
-    getapi()
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
     
-}
+    const payload = {
+      basicInfo: {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email
+      },
+      academicInfo: [
+        {
+          type: formData.eduType,
+          institute: formData.institute,
+          passingYear: formData.passingYear
+        }
+      ],
+      employementInfo: [
+        {
+          employeeCode: formData.employeeCode,
+          companyName: formData.companyName,
+          designation: formData.designation
+        }
+      ]
+    };
 
-return(
-  <div className="paper" >
-    <form className="mainDiv" onSubmit={e=> {handleSubmit(e)}} >
-      <Grid container spacing={2}>
-      <Card className="Card1">
-         <h3>Besic Information</h3>
+    fetch("http://localhost:3000/api/user/", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('User added successfully!');
+        } else {
+          alert('Error adding user!');
+        }
+      });
+  };
 
-          <Grid item xs={12}>
-          <TextField
-        label="First Name"
-        fullWidth
-        name="firstName"
-        value={state.firstName}
-        onChange={handleChange}
-      />
-          </Grid>
-        <Grid item xs={12}>
+  return (
+    <div className='paper'>
+    <form className='mainDiv' onSubmit={handleSubmit}>
+      <React.Fragment container spacing={3} display="flex" flexDirection="column" alignItems="center">
+        <Grid container spacing={2}>
+
+            <Card className='Card1'>
+                <h3>Besic Information</h3>
+      <Grid item xs={12}>
         <TextField
-        label="Last Name"
-        name="lastName"
-
         fullWidth
-        value={state.lastName}
-        onChange={handleChange}
-      />
-        </Grid>
-        <Grid item xs={12}>
+          label="First Name"
+          value={formData.firstName}
+          onChange={handleChange}
+        /></Grid>
+
+        <Grid item xs={8}>
         <TextField
-        label="Email"
-        name="email"
-
         fullWidth
-        value={state.email}
-        onChange={handleChange}
-      />
-        </Grid>
+          label="Last Name"
+          value={formData.lastName}
+          onChange={handleChange}
+        /></Grid>
+        <Grid item xs={8}>
+        <TextField
+        fullWidth
+          label="Email"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+        /></Grid>
         </Card>
-        <Card className="Card1">
-        <Grid item xs={12}>
-        <h3>Academic information </h3>
-           <TextField id="select" label="Select highest Education"  onChange={handleChange} fullWidth select>
-             <MenuItem value="ssc">SSC</MenuItem>
-             <MenuItem value="hsc">HSC</MenuItem>
-             <MenuItem value="graduation">Graduation</MenuItem>
-             <MenuItem value="post graduation">Post Graduation</MenuItem>
-          </TextField>
         </Grid>
-        
-        <Grid item xs={12}>
-           <TextField label="School/College/University" varient="outlined" fullWidth value={state.college} onChange={handleChange}/>
-        </Grid>
-        <Grid item xs={12}>
-           <TextField type="date" varient="outlined" fullWidth onChange={handleChange} />
-        </Grid>
-        </Card>
-        <Card className="Card1">
-        <Grid item xs={12}>
-        <h3>Employment information  </h3>
-           <TextField  label="Employee code " fullWidth value={state.employeeCode} onChange={handleChange} />
-       </Grid>
-        <Grid item xs={12}>
+
+        <Card className='Card1'>
+            <h3>Academic Information</h3>
+            <Grid item xs={8}>
         <TextField
-        label="Company Name"
-        fullWidth
-        value={state.companyName}
-        onChange={handleChange}
-      />
-        </Grid>
-        <Grid item xs={12}>
+          label="Education Type"
+          value={formData.eduType}
+          onChange={handleChange}
+        /></Grid>
+        <Grid item xs={8}>
         <TextField
-        label="Designation"
-        fullWidth
-        value={state.designation}
-        onChange={handleChange}
-      />
-        </Grid>
+          label="Institute Name"
+          value={formData.institute}
+          onChange={handleChange}
+        /></Grid>
+        <Grid item xs={8}>
+        <TextField
+        type="date"
+          label="Passing Year"
+          value={formData.passingYear}
+          onChange={handleChange}
+        /></Grid>
+
+      </Card>
+
+        <Card className='Card1'>
+            <Grid item xs={8}>
+                <h3>Employment Information</h3>
+        <TextField
+          label="Employee Code"
+          value={formData.employeeCode}
+          onChange={handleChange}
+        /></Grid>
+        <Grid item xs={8}>
+        <TextField
+          label="Company Name"
+          value={formData.companyName}
+          onChange={handleChange}
+        /></Grid>
+        <Grid item xs={8}>
+        <TextField
+          label="Designation"
+          value={formData.designation}
+          onChange={handleChange}
+        /></Grid>
         </Card>
-        <Grid item xs={7.5}></Grid>
-        
-        <Grid item xs={2}>
-        <Button variant="contained" type="reset" color="error"  fullWidth>Cancel</Button>
-        </Grid>
-
-        <Grid item xs={2}>
-        <Button variant="contained" type="submit" onClick={handleSubmit} fullWidth>Submit</Button>
-        </Grid>
-
-
-      </Grid>
-     
+       <Grid> <Button variant="contained" color="error" type="reset" onClick={handleReset}>Cancel</Button> </Grid>
+       <Grid item xs={4}> <Button variant="contained" color="primary" type="submit">Submit</Button></Grid>
+      </React.Fragment>
     </form>
     </div>
-)};
+  );
+}
 
-export default AddUser;
+export default AddUserForm;
