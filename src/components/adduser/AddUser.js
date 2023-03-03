@@ -1,12 +1,12 @@
-import React,{useState,useEffect} from "react";
-import "./AddUser.css";
-import { TextField,Grid,Button,MenuItem, Card, Paper} from "@mui/material";
-import axios from "axios";
+import React,{useState} from "react";
+import './AddUser.css'
+import { TextField,Grid,Button,MenuItem, Card} from "@mui/material";
+
 
 const AddUser=({userId})=>{
 
-    const [firstName,setFirstName]=useState("")
-    const [user,setUser]=useState([])
+    // const [firstName,setFirstName]=useState("")
+    // const [user,setUser]=useState([])
   const [state, setState] = useState({
     firstName: "",
     lastName: '',
@@ -25,15 +25,15 @@ const handleChange = (e) => {
   setState((prevState)=>({...prevState,[name]:value}));
 }
 
-  const getapi=async()=>{
-    const payload=state
-    const result=await axios.post("http://localhost:3000/api/user/",payload)
-  }
+  // const getapi=async()=>{
+  //   const payload=state
+  //   const result=await axios.post("http://localhost:3000/api/user/",payload)
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("state",state)
-    getapi()
+    // getapi()
     
 }
 
