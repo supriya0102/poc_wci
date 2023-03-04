@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Avatar from "avataaars";
+// import Avatar from "avataaars";
 import "./profilepage.css";
 import { useParams } from "react-router-dom";
 
@@ -25,7 +25,7 @@ const ProfilePage = () => {
         <Card sx={{ maxWidth: 650 }}>
           <div className="header-container">
             <div className="image-container">
-              <Avatar
+              {/* <Avatar
                 style={{ width: "100px", height: "100px" }}
                 avatarStyle="Circle"
                 topType="ShortHairShortFlat"
@@ -38,7 +38,7 @@ const ProfilePage = () => {
                 eyebrowType="Default"
                 mouthType="Smile"
                 skinColor="Pale"
-              />
+              /> */}
             </div>
             <div className="title-container">
               <h1>{user?.basicInfo?.firstName}</h1>

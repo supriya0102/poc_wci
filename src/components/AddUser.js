@@ -6,14 +6,14 @@ import { TextField,Button,Grid,Card } from '@mui/material';
 function AddUserForm() {
     const [formData, setFormData] = useState({
         firstName: '',
-        lastName: '',
-        email: '',
-        eduType: '',
-        institute: '',
-        passingYear: '',
-        employeeCode: '',
-        companyName: '',
-        designation: ''
+        // lastName: '',
+        // email: '',
+        // eduType: '',
+        // institute: '',
+        // passingYear: '',
+        // employeeCode: '',
+        // companyName: '',
+        // designation: ''
       });
 
       const handleChange = (event) => {
@@ -78,7 +78,7 @@ function AddUserForm() {
   return (
     <div className='paper'>
     <form className='mainDiv' onSubmit={handleSubmit}>
-      <React.Fragment container spacing={3} display="flex" flexDirection="column" alignItems="center">
+      <React.Fragment container spacing={3} >
         <Grid container spacing={2}>
 
             <Card className='Card1'>
@@ -87,6 +87,7 @@ function AddUserForm() {
         <TextField
         fullWidth
           label="First Name"
+
           value={formData.firstName}
           onChange={handleChange}
         /></Grid>
@@ -154,7 +155,7 @@ function AddUserForm() {
           onChange={handleChange}
         /></Grid>
         </Card>
-       <Grid> <Button variant="contained" color="error" type="reset" onClick={handleReset}>Cancel</Button> </Grid>
+       <Grid item xs={4}> <Button variant="contained" color="error" type="reset" onClick={handleReset}>Cancel</Button> </Grid>
        <Grid item xs={4}> <Button variant="contained" color="primary" type="submit">Submit</Button></Grid>
       </React.Fragment>
     </form>
