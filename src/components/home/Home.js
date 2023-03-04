@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "./Header";
+import Header from "../header/Header";
 import {
   Table,
   TableBody,
@@ -13,7 +13,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import { users } from "../store/home/HomeAction";
+import { users } from "../../store/home/HomeAction";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -63,9 +63,11 @@ function Home() {
                   <TableCell align="right">{row.lastName}</TableCell>
                   <TableCell align="right">{row.email}</TableCell>
                   <TableCell align="right">
+                  <Link to={`update/${row.id}`}>
                     <IconButton>
                       <Edit></Edit>
                     </IconButton>
+                  </Link>
                   </TableCell>
                   <TableCell align="right" onClick={onViewClick}>
                     <Link to={`profile/${row.id}`}>

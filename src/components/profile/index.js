@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-// import Avatar from "avataaars";
-import "./profilepage.css";
+import Avatar from "avataaars";
+import "./index.css";
 import { useParams } from "react-router-dom";
-
+import { getUserDetails } from "../../store/home/HomeAction";
 const ProfilePage = () => {
-  const [user, setuser] = useState("");
   const { id } = useParams();
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    const getUserDetails = async () => {
-      let result = await fetch(`http://localhost:3000/api/user/${id}`);
-      result = await result.json();
-      setuser(result);
-    };
-    getUserDetails();
-  }, [id]);
-
+    getUserDetails(id).then((res) => {
+      dispatch(res);
+    });
+  }, [dispatch]);
+  const reduxStore = useSelector((state) => {
+    return state.userDetailReducer.user;
+  });
   return (
     <div className="container">
       <div className="outer-container">
@@ -41,8 +40,8 @@ const ProfilePage = () => {
               /> */}
             </div>
             <div className="title-container">
-              <h1>{user?.basicInfo?.firstName}</h1>
-              <h1>{user?.basicInfo?.lastName}</h1>
+              <h1>{reduxStore?.basicInfo?.firstName}</h1>
+              <h1>{reduxStore?.basicInfo?.lastName}</h1>
             </div>
           </div>
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
@@ -55,9 +54,9 @@ const ProfilePage = () => {
                 color="text.secondary"
                 component={"div"}
               >
-                <h4>First Name: {user?.basicInfo?.firstName}</h4>
-                <h4>Last Name: {user?.basicInfo?.lastName} </h4>
-                <h4>Email: {user?.basicInfo?.email}</h4>
+                <h4>First Name: {reduxStore?.basicInfo?.firstName}</h4>
+                <h4>Last Name: {reduxStore?.basicInfo?.lastName} </h4>
+                <h4>Email: {reduxStore?.basicInfo?.email}</h4>
               </Typography>
             </CardContent>
           </Card>
@@ -71,12 +70,12 @@ const ProfilePage = () => {
                 color="text.secondary"
                 component={"div"}
               >
-                <h4>Education: {user?.academicInfo?.[0]?.type} </h4>
+                <h4>Education: {reduxStore?.academicInfo?.[0]?.type} </h4>
                 <h4>
                   School/College/University:{" "}
-                  {user?.academicInfo?.[0]?.institute}
+                  {reduxStore?.academicInfo?.[0]?.institute}
                 </h4>
-                <h4>Passing Year:{user?.academicInfo?.[0]?.passingYear}</h4>
+                <h4>Passing Year:{reduxStore?.academicInfo?.[0]?.passingYear}</h4>
               </Typography>
             </CardContent>
           </Card>
@@ -91,12 +90,12 @@ const ProfilePage = () => {
                 component={"div"}
               >
                 <h4>
-                  Employee Code: {user?.employementInfo?.[0]?.employeeCode}
+                  Employee Code: {reduxStore?.employementInfo?.[0]?.employeeCode}
                 </h4>
                 <h4>
-                  Company Name: {user?.employementInfo?.[0]?.companyName}{" "}
+                  Company Name: {reduxStore?.employementInfo?.[0]?.companyName}{" "}
                 </h4>
-                <h4>Designation: {user?.employementInfo?.[0]?.designation} </h4>
+                <h4>Designation: {reduxStore?.employementInfo?.[0]?.designation} </h4>
               </Typography>
             </CardContent>
           </Card>
