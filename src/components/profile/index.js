@@ -51,14 +51,14 @@ const ProfilePage = () => {
           <Card sx={{ minWidth: 275, background: "#f3f0f0", margin: "20px" }}>
             <CardContent>
               <Typography gutterBottom variant="h5" component={"span"}>
-              <h5> Personal Information</h5>
+              <Typography gutterBottom variant="h5" component={"span"}>Personal Information</Typography>
               </Typography>
               <Typography
                 variant="body2"
                 color="text.secondary"
                 component={"div"}
               >
-                <h3>First Name: {reduxStore?.basicInfo?.firstName}</h3>
+                <h4>First Name: {reduxStore?.basicInfo?.firstName}</h4>
                 <h4>Last Name: {reduxStore?.basicInfo?.lastName} </h4>
                 <h4>Email: {reduxStore?.basicInfo?.email}</h4>
               </Typography>

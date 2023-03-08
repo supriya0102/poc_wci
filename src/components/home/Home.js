@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../header/Header";
-import { IconButton, Avatar, TextField, Select, MenuItem } from "@mui/material";
+import { IconButton, Avatar, TextField, Select, MenuItem, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { users } from "../../store/home/HomeAction";
 import { useNavigate, Link } from "react-router-dom";
@@ -38,16 +38,18 @@ function Home() {
 
   return (
     <>
+    <Header/>
       <div className="container">
         <div className="input-container">
           <TextField
             id="standard-basic"
             label="Search Text"
             variant="standard"
+            className="search-input"
           />
         </div>
         <div className="select-container">
-          <h4>Filter Field</h4>
+          <Typography  style={{marginLeft:10}}>Filter Field</Typography>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-helper-label">Select</InputLabel>
             <Select
@@ -67,9 +69,9 @@ function Home() {
           </FormControl>
         </div>
         <div className="select-container">
-          <h4>Sort By</h4>
+          <Typography style={{marginLeft:10}}>Sort By</Typography>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-helper-label">Select</InputLabel>
+            <InputLabel id="demo-simple-select-helper-label" >Select</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
