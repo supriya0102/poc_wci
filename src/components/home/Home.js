@@ -42,6 +42,8 @@ function Home() {
     setState(event.target.value);
   };
 
+ 
+
   useEffect(() => {
     users().then((res) => {
       dispatch(res);
@@ -50,7 +52,7 @@ function Home() {
 
   return (
     <>
-      <Header />
+      <Header buttonText="Add User"  />
       <div className="container">
         <div className="input-container">
           <TextField
