@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function Header(props) {
+function Header({buttonText}) {
   return (
       <AppBar position="static">
         <Toolbar>
@@ -9,7 +9,7 @@ function Header(props) {
             component="div" sx={{ flexGrow: 1 }}>
             Western Climate Initiative
           </Typography>
-         <Link to="/adduser" style={{textDecoration:"none"}} ><Button  style={{color:"white",textDecoration:"none"}} >Add User</Button></Link> 
+         <Link to={`/${buttonText === "Add User" ? 'adduser':''}`} style={{textDecoration:"none"}} ><Button  style={{color:"white",textDecoration:"none"}} >{buttonText}</Button></Link> 
         </Toolbar>
       </AppBar>
   );
