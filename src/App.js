@@ -2,9 +2,8 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/home/Home';
 import ProfilePage from './components/profile';
-import AddUser from './components/adduser';
 import UpdateUser from './components/updateuser';
-
+import AddUser from './components/adduser-old/AddUser';
 function App() {
   return (
       <>
