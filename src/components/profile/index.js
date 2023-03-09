@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import {Avatar} from "@mui/material";
+import { Avatar } from "@mui/material";
 import "./index.css";
 import { useParams } from "react-router-dom";
 import { getUserDetails } from "../../store/home/HomeAction";
