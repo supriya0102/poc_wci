@@ -1,0 +1,79 @@
+h4 {
+  color: #6d6d6d;
+}
+
+.search-input {
+  width: 120%;
+  margin-right: 10px;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 29px;
+  background: #f6f4f4;
+  border-radius: 16px;
+}
+.container {
+  margin-right: 700px;
+  margin-top: 10px;
+
+}
+
+.input-container {
+  margin-left: 25px;
+  margin-right: 20px;
+  padding: 10px;
+ 
+}
+
+.select-container {
+  margin-left: 10px;
+  padding: 10px;
+}
+
+.per-card-1 {
+  text-align: center;
+  width: 250px;
+}
+
+.card-image {
+  padding: 20px;
+  width: 50%;
+  height: 50%;
+}
+
+.per-card-1 .card-content .card-title {
+  font-size: 20px;
+  padding-bottom: 6px;
+}
+
+.per-card-1 .card-content .per-position {
+  color: #002255;
+  padding-bottom: 10px;
+}
+
+.icon-container {
+  margin: 64px 0px 1px;
+  width: 100%;
+  background: #eeebeb;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.icon-container .icon {
+  margin-left: 35px;
+  margin-right: 35px;
+}
+
+.card-btn button:hover {
+  background: #383838;
+}
