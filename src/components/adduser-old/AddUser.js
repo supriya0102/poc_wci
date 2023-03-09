@@ -1,7 +1,6 @@
 import React, { useReducer, useState } from "react";
 import './AddUser.css'
 import { TextField, Grid, Button, MenuItem, Card } from "@mui/material";
-// import "react-datepicker/dist/react-datepicker.css";
 import { validationAction, validationReducer } from "../../utils/validation";
 import { getValidation } from "./validationCheck";
 import { toast, ToastContainer } from "react-toastify";
@@ -136,6 +135,7 @@ const AddUser = ({ userId }) => {
               <TextField
                 label="Email"
                 name="email"
+                type="email"
                 fullWidth
                 value={state.email}
                 onChange={e => {handleChange(e)
