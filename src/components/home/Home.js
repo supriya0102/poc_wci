@@ -21,6 +21,7 @@ import InputLabel from "@mui/material/InputLabel";
 
 function Home() {
   const [state, setState] = useState("");
+  const [sortState, setSortState] = useState("");
   const dispatch = useDispatch();
   const reduxStore = useSelector((state) => state.usersReducer.users);
   const navigate = useNavigate();
@@ -42,7 +43,40 @@ function Home() {
     setState(event.target.value);
   };
 
- 
+  const handleSortChange = (event) => {
+    setSortState(event.target.value);
+    if (event.target.value === "first name") {
+      reduxStore.sort(function (a, b) {
+        if (a.firstName < b.firstName) {
+          return -1;
+        }
+        if (a.firstName > b.firstName) {
+          return 1;
+        }
+        return 0;
+      });
+    } else if (event.target.value === "last name") {
+      reduxStore.sort(function (a, b) {
+        if (a.lastName < b.lastName) {
+          return -1;
+        }
+        if (a.lastName > b.lastName) {
+          return 1;
+        }
+        return 0;
+      });
+    } else if (event.target.value === "email") {
+      reduxStore.sort(function (a, b) {
+        if (a.email < b.email) {
+          return -1;
+        }
+        if (a.email > b.email) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+  };
 
   useEffect(() => {
     users().then((res) => {
@@ -52,7 +86,7 @@ function Home() {
 
   return (
     <>
-      <Header buttonText="Add User"  />
+      <Header buttonText="Add User" />
       <div className="container">
         <div className="input-container">
           <TextField
@@ -77,9 +111,9 @@ function Home() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>First Name(a-z)</MenuItem>
-              <MenuItem value={20}>Last Name(a-z)</MenuItem>
-              <MenuItem value={30}>Email(a-z)</MenuItem>
+              <MenuItem value={10}>First Name</MenuItem>
+              <MenuItem value={20}>Last Name</MenuItem>
+              <MenuItem value={30}>Email</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -90,17 +124,17 @@ function Home() {
             <Select
               labelId="demo-simple-select-helper-label"
               id="demo-simple-select-helper"
-              value={state}
+              value={sortState}
               label="Select"
-              onChange={handleChange}
+              onChange={handleSortChange}
               style={{ height: 40 }}
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value={10}>First Name</MenuItem>
-              <MenuItem value={20}>Last Name</MenuItem>
-              <MenuItem value={30}>Email</MenuItem>
+              <MenuItem value="first name">First Name(A-Z)</MenuItem>
+              <MenuItem value="last name">Last Name(A-Z)</MenuItem>
+              <MenuItem value="email">Email(A-Z)</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -131,7 +165,7 @@ function Home() {
                   </div>
                   <div className="per-position">{row.email} </div>
                   <div className="icon-container">
-                    <IconButton onClick={() =>onViewClick(row.id)}>
+                    <IconButton onClick={() => onViewClick(row.id)}>
                       <VisibilityIcon />
                     </IconButton>
                     <IconButton className="icon">
