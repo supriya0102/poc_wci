@@ -36,7 +36,13 @@ const AddUser = ({ userId }) => {
     getUserDetails(id).then((res) => {
       dispatch(res);
     });
-  }, [dispatch]);
+  }, [dispatch,id]);
+
+  // useEffect(() => {
+  //   getUserDetails(id).then((res) => {
+  //     dispatch(res);
+  //   });
+  // }, [id]);
 
   const reduxStore = useSelector((state) => {
     return state.userDetailReducer.user;
@@ -71,7 +77,7 @@ const AddUser = ({ userId }) => {
     navigate('/')
   }
 
-  const  handleReset = () => {
+  const handleReset = () => {
     setState({
       firstName: "",
       lastName: '',
@@ -117,82 +123,83 @@ const AddUser = ({ userId }) => {
             }
           ]
         };
-  
+
         updateUserDetails(payload).then((res) => {
           dispatch(res);
-          console.log("success ", res);
-          if (updatedReduxStore.payload.statusCode === 201) {
+          console.log("success ", updatedReduxStore);
+          // if (updatedReduxStore.payload.statusCode === 200) {
 
             handleReset()
             toast.success("User updated successfully!", {
               position: toast.POSITION.BOTTOM_RIGHT
             });
             // alert('User updated successfully!');
-            navigate("/");
-          } else {
-            alert('Oops! something happend wrong');
-          }
+            backToDashBoard();
+            setTimeout(() => {
+              navigate('/')
+            }, 3000)
+        //   } else {
+        //     alert('Oops! something happend wrong');
+        //   }
         });
-  
+
       } else {
-
-        
-              const payload =
-              {
-                basicInfo:
-                {
-                  firstName: state.firstName,
-                  lastName: state.lastName,
-                  email: state.email
-                },
-                academicInfo:
-                  [{
-                    type: state.educationType,
-                    institute: state.college,
-                    passingYear: state.passingYear
-                  }],
-                employementInfo:
-                  [{
-                    employeeCode: state.employeeCode,
-                    companyName: state.companyName,
-                    designation: state.designation
-                  }]
-              }
-              const result = await axios.post("http://localhost:3000/api/user/", payload)
-              console.log("======", result)
-              if (result.status === 200) {
-                handleReset()
-                toast.success("User created", {
-                  position: toast.POSITION.BOTTOM_RIGHT
-                });
-                setTimeout(() => {
-                  navigate('/')
-                }, 3000)
-              }
-            }
-            console.log("state", state)
-        
-          }
-      }
-
-
-
-      useEffect(() => {
-        if (id) {
-          const updateForm = {
-            firstName: reduxStore?.basicInfo && reduxStore?.basicInfo?.firstName,
-            lastName: reduxStore?.basicInfo && reduxStore?.basicInfo?.lastName,
-            email: reduxStore?.basicInfo && reduxStore?.basicInfo?.email,
-            type: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.type,
-            institute: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.institute,
-            passingYear: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.passingYear,
-            employeeCode: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.employeeCode,
-            companyName: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.companyName,
-            designation: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.designation,
-          }
-          setState(updateForm)
+        const payload =
+        {
+          basicInfo:
+          {
+            firstName: state.firstName,
+            lastName: state.lastName,
+            email: state.email
+          },
+          academicInfo:
+            [{
+              type: state.educationType,
+              institute: state.college,
+              passingYear: state.passingYear
+            }],
+          employementInfo:
+            [{
+              employeeCode: state.employeeCode,
+              companyName: state.companyName,
+              designation: state.designation
+            }]
         }
-      }, [id])
+        const result = await axios.post("http://localhost:3000/api/user/", payload)
+        console.log("======", result)
+        if (result.status === 200) {
+          handleReset()
+          toast.success("User created", {
+            position: toast.POSITION.BOTTOM_RIGHT
+          });
+          setTimeout(() => {
+            navigate('/')
+          }, 3000)
+        }
+      }
+      console.log("state", state)
+
+    }
+  }
+
+
+
+  useEffect(() => {
+    if (id) {
+      const updateForm = {
+        firstName: reduxStore?.basicInfo && reduxStore?.basicInfo?.firstName,
+        lastName: reduxStore?.basicInfo && reduxStore?.basicInfo?.lastName,
+        email: reduxStore?.basicInfo && reduxStore?.basicInfo?.email,
+        type: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.type,
+        institute: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.institute,
+        passingYear: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.passingYear,
+        employeeCode: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.employeeCode,
+        companyName: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.companyName,
+        designation: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.designation,
+      }
+      setState(updateForm)
+    }
+  }, [id, reduxStore, updatedReduxStore])
 
 
 
@@ -203,12 +210,12 @@ const AddUser = ({ userId }) => {
           <Card className="Card1">
             <h3>Basic Information</h3>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} >
               <TextField
                 label="First Name"
                 fullWidth
                 // className="text"
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 name="firstName"
                 value={state.firstName}
                 onChange={e => {
@@ -223,7 +230,7 @@ const AddUser = ({ userId }) => {
               <TextField
                 label="Last Name"
                 name="lastName"
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 fullWidth
                 value={state.lastName}
                 onChange={e => {
@@ -238,15 +245,16 @@ const AddUser = ({ userId }) => {
               <TextField
                 label="Email"
                 name="email"
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 type="email"
                 fullWidth
                 value={state.email}
-                onChange={e => {handleChange(e)
+                onChange={e => {
+                  handleChange(e)
                   dispatchForErr(validationAction(e.target.name, e.target.value ? false : true))
-                  dispatchForErr(validationAction('isValidEmail', 
-                  e.target.value && e.target.value.length ?
-                   validationUtility.email(e.target.value) ? false : true : false))
+                  dispatchForErr(validationAction('isValidEmail',
+                    e.target.value && e.target.value.length ?
+                      validationUtility.email(e.target.value) ? false : true : false))
                 }}
               />
               {stateForErr.email && <span className="validation-text">Email is required</span>}
@@ -259,7 +267,7 @@ const AddUser = ({ userId }) => {
               <TextField
                 id="select"
                 label="Select highest Education"
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 name='educationType'
                 value={state.educationType}
                 onChange={e => {
@@ -277,7 +285,7 @@ const AddUser = ({ userId }) => {
               <TextField label="School/College/University"
                 name='college'
                 varient="outlined"
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 fullWidth
                 value={state.college}
                 onChange={e => {
@@ -288,23 +296,23 @@ const AddUser = ({ userId }) => {
             </Grid>
             <Grid item xs={12}>
               <TextField
-              label="Passing year"
-              name="passingYear"
-              sx={{margin:"20px"}}
-              type="number"
-              varient="outlined"
-              fullWidth
-              value={state.passingYear}
-              onChange={e => {
-                handleChange(e)
-                dispatchForErr(validationAction(e.target.name, e.target.value ? false : true))
-                dispatchForErr(validationAction('isValidPassingYear',  e.target.value.length > 4 ? true : false))
-              }}
+                label="Passing year"
+                name="passingYear"
+                sx={{ margin: "20px" }}
+                type="number"
+                varient="outlined"
+                fullWidth
+                value={state.passingYear}
+                onChange={e => {
+                  handleChange(e)
+                  dispatchForErr(validationAction(e.target.name, e.target.value ? false : true))
+                  dispatchForErr(validationAction('isValidPassingYear', e.target.value.length > 4 ? true : false))
+                }}
 
               />
               {stateForErr.passingYear && <span className="validation-text">passing year is required</span>}
               {stateForErr.isValidPassingYear && <span className="validation-text">Enter valid Passing year</span>}
-            
+
             </Grid>
           </Card>
           <Card className="Card1">
@@ -313,7 +321,7 @@ const AddUser = ({ userId }) => {
               <TextField
                 label="Employee code "
                 name='employeeCode'
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 fullWidth
                 value={state.employeeCode}
                 onChange={e => {
@@ -327,7 +335,7 @@ const AddUser = ({ userId }) => {
                 label="Company Name"
                 fullWidth
                 name="companyName"
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 value={state.companyName}
                 onChange={e => {
 
@@ -341,7 +349,7 @@ const AddUser = ({ userId }) => {
               <TextField
                 label="Designation"
                 name='designation'
-                sx={{margin:"20px"}}
+                sx={{ margin: "20px" }}
                 fullWidth
                 value={state.designation}
                 onChange={e => {

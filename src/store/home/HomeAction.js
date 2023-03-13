@@ -13,6 +13,7 @@ export const getUserDetails = async (id) => {
 
 export const updateUserDetails = async (payload) =>{
     const user = await updateUser(payload);
+    console.log(user, "======")
     return { type: UPDATE_USER_API_SUCCESS, payload: user.data } 
 }
 

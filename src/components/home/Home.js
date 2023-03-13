@@ -42,6 +42,11 @@ function Home() {
     console.log(id);
     navigate(`/profile/${id}`);
   };
+
+  const onEditClick = (id) => {
+    navigate(`/update/${id}`);
+  }
+  
   const handleChange = (event) => {
     setState(event.target.value);
   };
@@ -202,7 +207,7 @@ function Home() {
                     <IconButton onClick={() => onViewClick(row.id)}>
                       <VisibilityIcon />
                     </IconButton>
-                    <IconButton className="icon">
+                    <IconButton className="icon" onClick={() => onEditClick(row.id)}>
                       <Edit></Edit>
                     </IconButton>
                     <IconButton>
