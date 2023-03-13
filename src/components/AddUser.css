@@ -4,17 +4,24 @@
 }
 
 .paper{
-    background-color: blanchedalmond;
+    background-color: rgb(246, 245, 244);
 }
 .mainDiv{
     margin: 10px;
-    align-items: center;
-
-    
+    align-items: center;  
 }
 
 .Card1{
     padding: 4%;
     padding-left: 1.5%;
     width: 100%;
+
+    margin-left: 15rem;
+    margin-right: 15rem;
+}
+
+
+.validation-text{
+  font-weight: 600;
+  color: red;
 }

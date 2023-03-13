@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 
 
 const UpdateUser = () => {
- 
+
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
@@ -18,22 +18,23 @@ const UpdateUser = () => {
       dispatch(res);
     });
   }, [dispatch]);
+
   const reduxStore = useSelector((state) => {
     return state.userDetailReducer.user;
   });
 
   const [formData, setFormData] = useState({
     firstName: reduxStore?.basicInfo && reduxStore?.basicInfo?.firstName,
-    lastName :reduxStore?.basicInfo && reduxStore?.basicInfo?.lastName,
-    email:   reduxStore?.basicInfo &&  reduxStore?.basicInfo?.email,
+    lastName: reduxStore?.basicInfo && reduxStore?.basicInfo?.lastName,
+    email: reduxStore?.basicInfo && reduxStore?.basicInfo?.email,
     type: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.type,
-    institute:reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.institute ,
+    institute: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.institute,
     passingYear: reduxStore?.academicInfo && reduxStore?.academicInfo[0]?.passingYear,
     employeeCode: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.employeeCode,
-    companyName: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.companyName ,
-    designation: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.designation ,
+    companyName: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.companyName,
+    designation: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.designation,
   });
-  
+
   const navigate = useNavigate();
   const updatedReduxStore = useSelector((state) => {
     return state.updateUserReducer.user;
@@ -42,7 +43,7 @@ const UpdateUser = () => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const { firstName,lastName,email,type, institute,passingYear,employeeCode,companyName,designation } = formData;
+  const { firstName, lastName, email, type, institute, passingYear, employeeCode, companyName, designation } = formData;
   const onSubmitHandler = () => {
     console.log(formData);
     const payload = {
@@ -76,7 +77,7 @@ const UpdateUser = () => {
     updateUserDetails(payload).then((res) => {
       dispatch(res);
       console.log("success ", res);
-      if(updatedReduxStore.payload.statusCode ===201){
+      if (updatedReduxStore.payload.statusCode === 201) {
         alert('User updated successfully!');
         navigate("/");
       } else {
@@ -84,78 +85,78 @@ const UpdateUser = () => {
       }
     });
   }
-  
+
   return (
     <div className="paper" >
-        <Grid container spacing={2}>
-          <Card className="Card1">
-            <h3>Besic Information</h3>
-            <Grid item xs={10}>
-              <TextField fullWidth id="outlined-basic" label="First Name" name="firstName"
-                required={true} onChange={handleInputChange} value={firstName} type="text"
-                 variant="outlined" />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField  fullWidth id="outlined-basic" label="Last Name" name="lastName"
-                required={true} onChange={handleInputChange} value={lastName} type="text" variant="outlined" />
+      <Grid container spacing={2}>
+        <Card className="Card1">
+          <h3>Besic Information</h3>
+          <Grid item xs={10}>
+            <TextField className="textfield" fullWidth id="outlined-basic" label="First Name" name="firstName"
+              required={true} onChange={handleInputChange} value={firstName} type="text"
+              variant="outlined" />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField fullWidth id="outlined-basic" label="Last Name" name="lastName"
+              required={true} onChange={handleInputChange} value={lastName} type="text" variant="outlined" />
 
-            </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField fullWidth id="outlined-basic" label="Email" name="email"
+              required={true} onChange={handleInputChange} value={email} type="text" variant="outlined" />
+          </Grid>
+        </Card>
+        <Card className="Card1">
+          <h3>Academic information </h3>
+          <Grid item xs={24}>
+            <FormControl fullWidth >
+              <InputLabel id="demo-simple-select-label">Education</InputLabel>
+              <Select labelId="demo-simple-select-label" id="demo-simple-select"
+                value={type} name={"eduType"} label="Gender" onChange={handleInputChange}>
+                <MenuItem value={""}>Select </MenuItem>
+                <MenuItem value={"HSC"}>HSC</MenuItem>
+                <MenuItem value={"Graduation"}>Graduation</MenuItem>
+              </Select>
+            </FormControl>
             <Grid item xs={12}>
-              <TextField  fullWidth id="outlined-basic" label="Email" name="email"
-                required={true} onChange={handleInputChange} value={email} type="text" variant="outlined" />
-            </Grid>
-          </Card>
-          <Card className="Card1">
-            <h3>Academic information </h3>
-            <Grid item xs={24}>
-              <FormControl  fullWidth >
-                <InputLabel id="demo-simple-select-label">Education</InputLabel>
-                <Select labelId="demo-simple-select-label" id="demo-simple-select"
-                  value={type} name={"eduType"} label="Gender" onChange={handleInputChange}>
-                  <MenuItem value={""}>Select </MenuItem>
-                  <MenuItem value={"HSC"}>HSC</MenuItem>
-                  <MenuItem value={"Graduation"}>Graduation</MenuItem>
-                </Select>
-              </FormControl>
-              <Grid item xs={12}>
-              <TextField  fullWidth id="outlined-basic" label="University/College" name="institute"
+              <TextField fullWidth id="outlined-basic" label="University/College" name="institute"
                 required={true} onChange={handleInputChange} value={institute} type="text" variant="outlined" />
 
-              </Grid>
-              <Grid item xs={12}>
-              <TextField  fullWidth id="outlined-basic" label="Passing Year" name="passingYear"
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth id="outlined-basic" label="Passing Year" name="passingYear"
                 required={true} onChange={handleInputChange} value={passingYear} type="text" variant="outlined" />
 
-              </Grid>
             </Grid>
-          </Card>
-          <Card className="Card1">
-            <h3>Employment information  </h3>
-              <Grid item xs={12}>
-               <TextField  fullWidth id="outlined-basic" label="Employee Code" name="employeeCode"
-                required={true} onChange={handleInputChange} value={employeeCode} type="text" variant="outlined" />
+          </Grid>
+        </Card>
+        <Card className="Card1">
+          <h3>Employment information  </h3>
+          <Grid item xs={12}>
+            <TextField fullWidth id="outlined-basic" label="Employee Code" name="employeeCode"
+              required={true} onChange={handleInputChange} value={employeeCode} type="text" variant="outlined" />
 
-                <Grid item xs={12}>
-                <TextField  fullWidth id="outlined-basic" label="Company Name" name="companyName"
+            <Grid item xs={12}>
+              <TextField fullWidth id="outlined-basic" label="Company Name" name="companyName"
                 required={true} onChange={handleInputChange} value={companyName} type="text" variant="outlined" />
 
-                </Grid>
-                <Grid item xs={12}>
-                <TextField  fullWidth id="outlined-basic" label="Desgination" name="designation"
-                  required={true} onChange={handleInputChange} value={designation} type="text" variant="outlined" />
-                </Grid>
-              </Grid>
-          </Card>
-          <Grid item xs={7.5}></Grid>
-
-          <Grid item xs={2}>
-            <Button variant="contained" type="reset" color="error" fullWidth>Cancel</Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth id="outlined-basic" label="Desgination" name="designation"
+                required={true} onChange={handleInputChange} value={designation} type="text" variant="outlined" />
+            </Grid>
           </Grid>
+        </Card>
+        <Grid item xs={7.5}></Grid>
 
-          <Grid item xs={2}>
-            <Button variant="contained" type="submit" onClick={onSubmitHandler} fullWidth>Submit</Button>
-          </Grid>
+        <Grid item xs={2}>
+          <Button variant="contained" type="reset" color="error" fullWidth>Cancel</Button>
         </Grid>
+
+        <Grid item xs={2}>
+          <Button variant="contained" type="submit" onClick={onSubmitHandler} fullWidth>Submit</Button>
+        </Grid>
+      </Grid>
     </div>
   );
 };

@@ -1,48 +1,26 @@
-*{
-    margin: 10px;
-    
-}
 
 .paper{
     background-color: rgb(246, 245, 244);
 }
 .mainDiv{
-    margin: 10px;
+    margin-top: 1%;
     align-items: center;  
 }
 
 .Card1{
     padding: 4%;
-    padding-left: 1.5%;
+    padding-left: 4.5%;
     width: 100%;
-
+    margin-top: 5%;
+    
     margin-left: 15rem;
     margin-right: 15rem;
 }
-
+.text {
+  margin: 20px;
+}
 
 .validation-text{
   font-weight: 600;
   color: red;
 }
-
-/* .react-datepicker__input-container {
-  background: none;
-  margin: 0;
-  display: block;
-  min-width: 0;
-  width: 100%;
-  height: 56px;
-
-}
-
-.react-datepicker__input-container input {
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0px 14px;
-  background: none;
-  border-radius: 4px;
-  border: 1px solid #c4c4c4;
-  outline: none;
-} */
