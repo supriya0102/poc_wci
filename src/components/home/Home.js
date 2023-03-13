@@ -174,7 +174,7 @@ function Home() {
         </div>
       </div>
 
-      <Grid container justifyContent="space-between" spacing={1}>
+      <Grid container justifyContent="start" spacing={1}>
         {search(reduxStore).map((row) => (
           <Grid key={row.id} item>
             <div className="card-container">
