@@ -12,7 +12,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/profile/:id" element={<ProfilePage />} />
             <Route path="/adduser" element={<AddUser />} />
-            <Route path="/update/:id" element={<UpdateUser />} />
+            {/* <Route path="/update/:id" element={<UpdateUser />} /> */}
+            <Route path="/update/:id" element={<AddUser />} />
           </Routes>
         </Router>
       </>
