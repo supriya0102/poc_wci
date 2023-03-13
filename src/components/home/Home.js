@@ -22,6 +22,9 @@ import InputLabel from "@mui/material/InputLabel";
 function Home() {
   const [state, setState] = useState("");
   const [sortState, setSortState] = useState("");
+  const [q, setQ] = useState("");
+  const [searchParam] = useState(["firstName", "lastName", "email"]);
+  const [filterParam, setFilterParam] = useState(["All"]);
   const dispatch = useDispatch();
   const reduxStore = useSelector((state) => state.usersReducer.users);
   const navigate = useNavigate();
@@ -84,6 +87,35 @@ function Home() {
     });
   }, []);
 
+  function search(items) {
+    return items.filter((item) => {
+ /*
+ // in here we check if our region is equal to our c state
+ // if it's equal to then only return the items that match
+ // if not return All the countries
+ */
+    if (item.region == filterParam) {
+        return searchParam.some((newItem) => {
+          return (
+            item[newItem]
+                .toString()
+                .toLowerCase()
+                .indexOf(q.toLowerCase()) > -1
+                     );
+                 });
+             } else if (filterParam == "All") {
+                 return searchParam.some((newItem) => {
+                     return (
+                         item[newItem]
+                             .toString()
+                             .toLowerCase()
+                             .indexOf(q.toLowerCase()) > -1
+                     );
+                 });
+             }
+         });
+     }
+
   return (
     <>
       <Header buttonText="Add User" />
@@ -94,6 +126,8 @@ function Home() {
             label="Search Text"
             variant="standard"
             className="search-input"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
           />
         </div>
         <div className="select-container">
@@ -109,11 +143,11 @@ function Home() {
               onChange={handleChange}
             >
               <MenuItem value="">
-                <em>None</em>
+                <em value="All">None</em>
               </MenuItem>
-              <MenuItem value={10}>First Name</MenuItem>
-              <MenuItem value={20}>Last Name</MenuItem>
-              <MenuItem value={30}>Email</MenuItem>
+              <MenuItem value="firstName">First Name</MenuItem>
+              <MenuItem value="lastName">Last Name</MenuItem>
+              <MenuItem value="email">Email</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -141,7 +175,7 @@ function Home() {
       </div>
 
       <Grid container justifyContent="space-between" spacing={1}>
-        {reduxStore.map((row) => (
+        {search(reduxStore).map((row) => (
           <Grid key={row.id} item>
             <div className="card-container">
               <div className="per-card-1">
