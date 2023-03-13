@@ -55,30 +55,30 @@ function Home() {
     setSortState(event.target.value);
     if (event.target.value === "first name") {
       reduxStore.sort(function (a, b) {
-        if (a.firstName < b.firstName) {
+        if (a.firstName.toLowerCase() < b.firstName.toLowerCase()) {
           return -1;
         }
-        if (a.firstName > b.firstName) {
+        if (a.firstName.toLowerCase() > b.firstName.toLowerCase()) {
           return 1;
         }
         return 0;
       });
     } else if (event.target.value === "last name") {
       reduxStore.sort(function (a, b) {
-        if (a.lastName < b.lastName) {
+        if (a.lastName.toLowerCase() < b.lastName.toLowerCase()) {
           return -1;
         }
-        if (a.lastName > b.lastName) {
+        if (a.lastName.toLowerCase() > b.lastName.toLowerCase()) {
           return 1;
         }
         return 0;
       });
     } else if (event.target.value === "email") {
       reduxStore.sort(function (a, b) {
-        if (a.email < b.email) {
+        if (a.email.toLowerCase() < b.email.toLowerCase()) {
           return -1;
         }
-        if (a.email > b.email) {
+        if (a.email.toLowerCase() > b.email.toLowerCase()) {
           return 1;
         }
         return 0;
