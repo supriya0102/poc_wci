@@ -35,6 +35,8 @@ const UpdateUser = () => {
     designation: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.designation,
   });
 
+  console.log("formData", formData)
+
   const navigate = useNavigate();
   const updatedReduxStore = useSelector((state) => {
     return state.updateUserReducer.user;
@@ -90,7 +92,7 @@ const UpdateUser = () => {
     <div className="paper" >
       <Grid container spacing={2}>
         <Card className="Card1">
-          <h3>Besic Information</h3>
+          <h3>Basic Information</h3>
           <Grid item xs={10}>
             <TextField className="textfield" fullWidth id="outlined-basic" label="First Name" name="firstName"
               required={true} onChange={handleInputChange} value={firstName} type="text"
