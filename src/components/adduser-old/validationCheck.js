@@ -6,8 +6,8 @@ export const getValidation = (dispatchForErr,validationAction,state) => {
         validationUtility.text(state.firstName) &&
         validationUtility.text(state.lastName) &&
         validationUtility.email(state.email) &&
-        validationUtility.text(state.college) &&
-        validationUtility.text(state.educationType) &&
+        validationUtility.text(state.institute) &&
+        validationUtility.text(state.type) &&
         validationUtility.text(state.employeeCode) &&
         validationUtility.text(state.passingYear) &&
         validationUtility.text(state.companyName) &&
@@ -27,12 +27,12 @@ export const getValidation = (dispatchForErr,validationAction,state) => {
           dispatchForErr(validationAction('email', true))
         }
 
-        if (!validationUtility.text(state.college)) {
-          dispatchForErr(validationAction('college', true))
+        if (!validationUtility.text(state.institute)) {
+          dispatchForErr(validationAction('institute', true))
         }
 
-        if (!validationUtility.text(state.educationType)) {
-          dispatchForErr(validationAction('educationType', true))
+        if (!validationUtility.text(state.type)) {
+          dispatchForErr(validationAction('type', true))
         }
 
         if (!validationUtility.text(state.employeeCode)) {

@@ -15,8 +15,8 @@ const userErrState = {
   firstName: false,
   lastName: false,
   email: false,
-  college: false,
-  educationType: false,
+  institute: false,
+  type: false,
   passingYear: false,
   employeeCode: false,
   companyName: false,
@@ -33,10 +33,10 @@ const AddUser = ({ userId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getUserDetails(id).then((res) => {
+    if(id) getUserDetails(id).then((res) => {
       dispatch(res);
     });
-  }, [dispatch,id]);
+  }, [dispatch, id]);
 
   // useEffect(() => {
   //   getUserDetails(id).then((res) => {
@@ -59,10 +59,10 @@ const AddUser = ({ userId }) => {
     firstName: "",
     lastName: '',
     email: '',
-    college: '',
-    educationType: '',
-    passingYear: '',
+    institute: '',
+    type: '',
     employeeCode: '',
+    passingYear: '',
     companyName: '',
     designation: '',
   });
@@ -82,8 +82,8 @@ const AddUser = ({ userId }) => {
       firstName: "",
       lastName: '',
       email: '',
-      college: '',
-      educationType: '',
+      institute: '',
+      type: '',
       passingYear: '',
       employeeCode: '',
       companyName: '',
@@ -91,6 +91,7 @@ const AddUser = ({ userId }) => {
     })
   }
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const isValidate = await getValidation(dispatchForErr, validationAction, state);
     if (isValidate) {
@@ -129,18 +130,18 @@ const AddUser = ({ userId }) => {
           console.log("success ", updatedReduxStore);
           // if (updatedReduxStore.payload.statusCode === 200) {
 
-            handleReset()
-            toast.success("User updated successfully!", {
-              position: toast.POSITION.BOTTOM_RIGHT
-            });
-            // alert('User updated successfully!');
-            backToDashBoard();
-            setTimeout(() => {
-              navigate('/')
-            }, 3000)
-        //   } else {
-        //     alert('Oops! something happend wrong');
-        //   }
+          // handleReset()
+          toast.success("User updated successfully!", {
+            position: toast.POSITION.BOTTOM_RIGHT
+          });
+          // alert('User updated successfully!');
+          backToDashBoard();
+          // setTimeout(() => {
+          //   navigate('/')
+          // }, 3000)
+          //   } else {
+          //     alert('Oops! something happend wrong');
+          //   }
         });
 
       } else {
@@ -154,8 +155,8 @@ const AddUser = ({ userId }) => {
           },
           academicInfo:
             [{
-              type: state.educationType,
-              institute: state.college,
+              type: state.type,
+              institute: state.institute,
               passingYear: state.passingYear
             }],
           employementInfo:
@@ -177,7 +178,7 @@ const AddUser = ({ userId }) => {
           }, 3000)
         }
       }
-      console.log("state", state)
+      console.log("state",)
 
     }
   }
@@ -268,8 +269,8 @@ const AddUser = ({ userId }) => {
                 id="select"
                 label="Select highest Education"
                 sx={{ margin: "20px" }}
-                name='educationType'
-                value={state.educationType}
+                name='type'
+                value={state.type}
                 onChange={e => {
                   handleChange(e)
                   dispatchForErr(validationAction(e.target.name, e.target.value ? false : true))
@@ -278,21 +279,23 @@ const AddUser = ({ userId }) => {
                 <MenuItem value="hsc">HSC</MenuItem>
                 <MenuItem value="graduation">Graduation</MenuItem>
                 <MenuItem value="post graduation">Post Graduation</MenuItem>
+                <MenuItem value="MCA">MCA</MenuItem>
               </TextField>
-              {stateForErr.educationType && <span className="validation-text">Education Type is required</span>}
+              {console.log("state")}
+              {stateForErr.type && <span className="validation-text">Education Type is required</span>}
             </Grid>
             <Grid item xs={12}>
               <TextField label="School/College/University"
-                name='college'
+                name='institute'
                 varient="outlined"
                 sx={{ margin: "20px" }}
                 fullWidth
-                value={state.college}
+                value={state.institute}
                 onChange={e => {
                   handleChange(e)
                   dispatchForErr(validationAction(e.target.name, e.target.value ? false : true))
                 }} />
-              {stateForErr.college && <span className="validation-text">college is required</span>}
+              {stateForErr.institute && <span className="validation-text">institute name is required</span>}
             </Grid>
             <Grid item xs={12}>
               <TextField
