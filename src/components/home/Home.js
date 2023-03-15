@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Edit } from "@mui/icons-material";
-import { users } from "../../store/home/HomeAction";
+import { deleteUserDetails, users } from "../../store/home/HomeAction";
 import { useNavigate, Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
@@ -45,6 +45,15 @@ function Home() {
 
   const onEditClick = (id) => {
     navigate(`/update/${id}`);
+  }
+
+  const onDeleteClick=(id)=>{
+    console.log("Selected it for delete",id);
+    deleteUserDetails(id).then((res) => {
+      users().then((res) => {
+        dispatch(res);
+      });
+    });
   }
   
   const handleChange = (event) => {
@@ -135,9 +144,9 @@ function Home() {
             onChange={(e) => setQ(e.target.value)}
           />
         </div>
-        <div className="select-container">
+        {/* <div className="select-container">
           <Typography style={{ marginLeft: 10 }}>Filter Field</Typography>
-          <FormControl sx={{ m: 1, minWidth: 120, minHeight: 10 }}>
+           <FormControl sx={{ m: 1, minWidth: 120, minHeight: 10 }}>
             <InputLabel id="demo-simple-select-helper-label">Select</InputLabel>
             <Select
               labelId="demo-simple-select-helper-label"
@@ -154,8 +163,8 @@ function Home() {
               <MenuItem value="lastName">Last Name</MenuItem>
               <MenuItem value="email">Email</MenuItem>
             </Select>
-          </FormControl>
-        </div>
+          </FormControl> 
+        </div> */}
         <div className="select-container">
           <Typography style={{ marginLeft: 10 }}>Sort By</Typography>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -207,11 +216,13 @@ function Home() {
                     <IconButton onClick={() => onViewClick(row.id)}>
                       <VisibilityIcon />
                     </IconButton>
+                    
                     <IconButton className="icon" onClick={() => onEditClick(row.id)}>
                       <Edit></Edit>
                     </IconButton>
-                    <IconButton>
-                      <RestoreFromTrashIcon></RestoreFromTrashIcon>
+                    <IconButton   onClick={() => onDeleteClick(row.id)}>
+                      <RestoreFromTrashIcon>
+                      </RestoreFromTrashIcon>
                     </IconButton>
                   </div>
                 </div>

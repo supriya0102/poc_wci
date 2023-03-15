@@ -1,5 +1,5 @@
-import { ADD_USER_API_SUCCESS, UPDATE_USER_API_SUCCESS, USER_DETAIL_API_SUCCESS, USER_LIST_API_SUCCESS } from '../../constant/Index';
-import { userList,getUser,updateUser, addUser } from '../../services/Axios';
+import { ADD_USER_API_SUCCESS, UPDATE_USER_API_SUCCESS, USER_DETAIL_API_SUCCESS, USER_LIST_API_SUCCESS,DELETE_USER_API_SUCCESS } from '../../constant/Index';
+import { userList,getUser,updateUser, addUser,deleteUser } from '../../services/Axios';
 
 export const users = async () => {
     const user = await userList();
@@ -13,12 +13,16 @@ export const getUserDetails = async (id) => {
 
 export const updateUserDetails = async (payload) =>{
     const user = await updateUser(payload);
-    console.log(user, "======")
     return { type: UPDATE_USER_API_SUCCESS, payload: user.data } 
 }
 
 export const addUserDetails = async (payload) =>{
     const user = await addUser(payload);
     return {type:ADD_USER_API_SUCCESS,payload:user.data}
+}
+
+export const deleteUserDetails = async (userId) =>{
+    const user = await deleteUser(userId);
+    return {type:DELETE_USER_API_SUCCESS,payload:user.data}
 }
 
