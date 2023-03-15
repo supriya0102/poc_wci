@@ -1,26 +1,22 @@
 
-.paper{
-    background-color: rgb(246, 245, 244);
-}
-.mainDiv{
-    margin-top: 1%;
-    align-items: center;  
-}
-
-.Card1{
-    padding: 4%;
-    padding-left: 4.5%;
-    width: 100%;
-    margin-top: 5%;
-    
-    margin-left: 15rem;
-    margin-right: 15rem;
-}
-.text {
-  margin: 20px;
-}
-
 .validation-text{
   font-weight: 600;
   color: red;
+}
+.main{
+  justify-content:center;
+  padding: 3%;
+  
+}
+.main2{
+  justify-content:center;
+  padding: 3%;
+  
+}
+.title{
+  padding-left: 8%;
+  position: static;
+}
+.mainDiv{
+  position: relative;
 }
