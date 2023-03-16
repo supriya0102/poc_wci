@@ -218,7 +218,7 @@ const AddUser = ({ userId }) => {
         >
           <Grid item className="mainChild" xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="First Name"
+              label="First Name *"
               fullWidth
               name="firstName"
               value={state.firstName}
@@ -235,7 +235,7 @@ const AddUser = ({ userId }) => {
           </Grid>
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="Last Name"
+              label="Last Name *"
               name="lastName"
               fullWidth
               value={state.lastName}
@@ -252,7 +252,7 @@ const AddUser = ({ userId }) => {
           </Grid>
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="Email"
+              label="Email *"
               name="email"
               type="email"
               fullWidth
@@ -295,7 +295,7 @@ const AddUser = ({ userId }) => {
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
               id="select"
-              label="Select highest Education"
+              label="Select highest Education *"
               name="type"
               fullWidth
               value={state.type}
@@ -322,7 +322,7 @@ const AddUser = ({ userId }) => {
           </Grid>
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="School/College/University"
+              label="School/College/University *"
               name="institute"
               fullWidth
               value={state.institute}
@@ -341,7 +341,7 @@ const AddUser = ({ userId }) => {
           </Grid>
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="Passing year"
+              label="Passing year *"
               name="passingYear"
               type="number"
               fullWidth
@@ -354,11 +354,11 @@ const AddUser = ({ userId }) => {
                 dispatchForErr(
                   validationAction(
                     "isValidPassingYear",
-                    e.target.value.length > 4 ? true : false
+                    e.target.value > new Date().getFullYear() ? true : false 
                   )
                 );
               }}
-            />
+              />
             {stateForErr.passingYear && (
               <span className="validation-text">passing year is required</span>
             )}
@@ -379,7 +379,7 @@ const AddUser = ({ userId }) => {
         >
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="Employee code "
+              label="Employee code *"
               name="employeeCode"
               fullWidth
               value={state.employeeCode}
@@ -396,7 +396,7 @@ const AddUser = ({ userId }) => {
           </Grid>
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="Company Name"
+              label="Company Name *"
               fullWidth
               name="companyName"
               value={state.companyName}
@@ -413,7 +413,7 @@ const AddUser = ({ userId }) => {
           </Grid>
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
-              label="Designation"
+              label="Designation *"
               name="designation"
               fullWidth
               value={state.designation}
