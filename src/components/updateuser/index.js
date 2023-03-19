@@ -35,7 +35,7 @@ const UpdateUser = () => {
     designation: reduxStore?.employementInfo && reduxStore?.employementInfo[0]?.designation,
   });
 
-  console.log("formData", formData)
+  // console.log("formData", formData)
 
   const navigate = useNavigate();
   const updatedReduxStore = useSelector((state) => {
@@ -115,7 +115,7 @@ const UpdateUser = () => {
               <InputLabel id="demo-simple-select-label">Education</InputLabel>
               <Select labelId="demo-simple-select-label" id="demo-simple-select"
                 value={type} name={"eduType"} label="Gender" onChange={handleInputChange}>
-                <MenuItem value={""}>Select </MenuItem>
+                <MenuItem value={"Select"}>Select </MenuItem>
                 <MenuItem value={"HSC"}>HSC</MenuItem>
                 <MenuItem value={"Graduation"}>Graduation</MenuItem>
               </Select>

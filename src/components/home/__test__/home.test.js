@@ -1,56 +1,30 @@
-import Home from "../Home";
-import thunk from "redux-thunk";
-import { MemoryRouter } from "react-router-dom";
-// import { shallow, mount } from "enzyme";
-import { fireEvent, render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+import { screen, render as rtlRender, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import userEvent from "@testing-library/user-event";
-import Header from "../../header/Header";
-const onSubmit = jest.fn();
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import store from "../../../store/Index";
+import Home from "../Home";
+import AddUser from "../../adduser-old/AddUser";
+import ProfilePage from "../../profile/index";
 
-const initialStateMock = 
-  [{
-    "id": 2,
-    "firstName": "Wahid",
-    "lastName": "ali",
-    "email": "wahidali@gmail.com",
-    "deleted": false,
-    "createdAt": "2023-03-09T06:29:35.066Z",
-    "updatedAt": "2023-03-13T12:26:12.923Z"
-}
-]
+const render = (component) =>
+  rtlRender(
+    <Provider store={store}>
+      <BrowserRouter>{component}</BrowserRouter>
+    </Provider>
+  );
 
-const mockStore = configureStore([thunk]);
-const store = mockStore(initialStateMock);
-
-// describe("Home Component", () => {
-//   test("renders all fields correctly", () => {
-//     render( <Provider store={store}>
-//         <Home />
-//     </Provider>);
-//     expect(screen.getByLabelText(/Search Text/i)).toBeInTheDocument();
-//     expect(screen.getByLabelText(/Select/i)).toBeInTheDocument();
-//   });
-describe("rendering components", () => {
-  it("renders Home component without crashing", () => {
-    render(
-      <Provider store={store}>
-        <Home />
-      </Provider>
-    );
+describe("Home Page Component", () => {
+  test("render for Add user button", () => {
+    render(<Home />);
+    expect(screen.getByText(/Western Climate Initiative/i)).toBeInTheDocument();
+    const btnEle = screen.queryByText("ADD USER");
+    expect(btnEle).toBeDefined();
+    expect(screen.getByLabelText(/Search Text/i)).toBeInTheDocument();
+    expect(screen.getByText(/Sort By/i)).toBeInTheDocument();
   });
 
-  it("renders components within Home without crashing", () => {
-    const wrapper = render(
-      <Provider store={store}>
-        <Header />
-      </Provider>
-    );
-
-    expect(wrapper.find(Layout)).toHaveLength(1);
-    expect(wrapper.find(HomePage)).toHaveLength(1);
-    expect(wrapper.find(AuthPage)).toHaveLength(1);
+  test("After clicking Add button shows Add user page", () => {
+    render(<AddUser />);
   });
 });

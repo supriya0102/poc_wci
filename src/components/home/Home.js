@@ -145,27 +145,6 @@ function Home() {
             onChange={(e) => setQ(e.target.value)}
           />
         </div>
-        {/* <div className="select-container">
-          <Typography style={{ marginLeft: 10 }}>Filter Field</Typography>
-           <FormControl sx={{ m: 1, minWidth: 120, minHeight: 10 }}>
-            <InputLabel id="demo-simple-select-helper-label">Select</InputLabel>
-            <Select
-              labelId="demo-simple-select-helper-label"
-              id="demo-simple-select-helper"
-              value={state}
-              label="Select"
-              style={{ height: 40 }}
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em value="All">None</em>
-              </MenuItem>
-              <MenuItem value="firstName">First Name</MenuItem>
-              <MenuItem value="lastName">Last Name</MenuItem>
-              <MenuItem value="email">Email</MenuItem>
-            </Select>
-          </FormControl> 
-        </div> */}
         <div className="select-container">
           <Typography style={{ marginLeft: 10 }}>Sort By</Typography>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
