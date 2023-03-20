@@ -215,6 +215,7 @@ const AddUser = ({ userId }) => {
           sm={12}
           md={12}
           lg={12}
+          item={true}
         >
           <Grid item className="mainChild" xs={10} sm={10} md={10} lg={10}>
             <TextField
@@ -291,6 +292,7 @@ const AddUser = ({ userId }) => {
           sm={12}
           md={12}
           lg={12}
+          item={true}
         >
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
@@ -313,7 +315,7 @@ const AddUser = ({ userId }) => {
               <MenuItem value="post graduation">Post Graduation</MenuItem>
               <MenuItem value="MCA">MCA</MenuItem>
             </TextField>
-            {console.log("state")}
+            {/* {console.log("state")} */}
             {stateForErr.type && (
               <span className="validation-text">
                 Education Type is required
@@ -376,6 +378,7 @@ const AddUser = ({ userId }) => {
           sm={12}
           md={12}
           lg={12}
+          item={true}
         >
           <Grid item xs={10} sm={10} md={10} lg={10}>
             <TextField
@@ -438,6 +441,7 @@ const AddUser = ({ userId }) => {
           sm={12}
           md={12}
           lg={12}
+          item={true}
         >
           <Grid item xs={4} sm={4} md={4} lg={4}>
             <Button

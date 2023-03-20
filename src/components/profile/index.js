@@ -23,13 +23,11 @@ const ProfilePage = () => {
     });
   }, [dispatch]);
 
-  
-
   const colors = ["#fcba03", "#2596be", "#e28743", "#154c79", "#873e23"];
   const rgb = colors[Math.floor(Math.random() * colors.length)];
   return (
     <>
-      <Header buttonText="Back"/>
+      <Header buttonText="Back" />
       <div className="profile-card-container">
         <Card sx={{ minWidth: 275 }} className="main-card">
           <CardContent className="card-meta-container">
@@ -48,10 +46,10 @@ const ProfilePage = () => {
               </Grid>
               <Grid item xs zeroMinWidth>
                 <Typography noWrap>
-                  <h1 className="title">
+                  <h2 className="title">
                     {reduxStore?.basicInfo?.firstName}{" "}
                     {reduxStore?.basicInfo?.lastName}
-                  </h1>
+                  </h2>
                 </Typography>
               </Grid>
             </Grid>

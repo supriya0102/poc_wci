@@ -6,7 +6,7 @@ import UpdateUser from './components/updateuser';
 import AddUser from './components/adduser-old/AddUser';
 function App() {
   return (
-      <>
+     
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -16,7 +16,7 @@ function App() {
             <Route path="/update/:id" element={<AddUser />} />
           </Routes>
         </Router>
-      </>
+     
   );
 }
 
