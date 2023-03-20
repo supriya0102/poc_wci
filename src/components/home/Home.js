@@ -146,7 +146,7 @@ function Home() {
           />
         </div>
         <div className="select-container">
-          <Typography style={{ marginLeft: 10 }}>Sort By</Typography>
+          <Typography style={{ marginLeft: 10 }} component={'span'}>Sort By</Typography>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
             <InputLabel id="demo-simple-select-helper-label">Select</InputLabel>
             <Select
