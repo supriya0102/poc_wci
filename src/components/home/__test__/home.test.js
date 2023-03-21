@@ -26,5 +26,6 @@ describe("Home Page Component", () => {
 
   test("After clicking Add button shows Add user page", () => {
     render(<AddUser />);
+    
   });
 });

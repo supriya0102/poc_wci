@@ -28,7 +28,7 @@ function Home() {
   const dispatch = useDispatch();
   const reduxStore = useSelector((state) => state.usersReducer.users);
   const navigate = useNavigate();
-  console.log(reduxStore);
+  // console.log(reduxStore);
   // console.log("users data", users());
 
   const colors = [
