@@ -18,6 +18,9 @@ describe("Profile Page Component", () => {
   test("render view user button", () => {
     render(<ProfilePage />);
     expect(screen.getByText(/Western Climate Initiative/i)).toBeInTheDocument();
+    expect(screen.getByText("Personal Information")).toBeInTheDocument();
+    expect(screen.getByText("Academic Information")).toBeInTheDocument();
+    expect(screen.getByText("Employement Information")).toBeInTheDocument();
     const btnEle = screen.queryByText("BACK");
     expect(btnEle).toBeDefined();
   });
